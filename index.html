@@ -2,38 +2,44 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Hệ Thống Tải Hóa Đơn Điện Tử - Expert v28</title>
+  <title>Hệ Thống Tải Hóa Đơn Điện Tử - Expert v41</title>
   <script src="https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <style>
     body { font-family: Tahoma, Arial, sans-serif; background-color: #f4f6f8; padding: 20px; font-size: 13px; margin: 0; }
-    .container { max-width: 1000px; margin: 0 auto; background: #fff; padding: 15px; border: 1px solid #d1d5db; border-radius: 4px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-    .header { color: #b30000; font-size: 18px; font-weight: bold; padding-bottom: 10px; border-bottom: 2px solid #b30000; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; text-transform: uppercase;}
-    .tabs { display: flex; border-bottom: 2px solid #b30000; margin-bottom: 20px; gap: 2px; }
-    .tab-btn { padding: 10px 20px; cursor: pointer; background: #e9ecef; border: 1px solid #ccc; border-bottom: none; border-radius: 5px 5px 0 0; font-weight: bold; color: #555; font-family: Tahoma; font-size: 12px; }
+    .container { max-width: 550px; margin: 0 auto; background: #fff; padding: 15px; border: 1px solid #d1d5db; border-radius: 4px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+    .header { color: #b30000; font-size: 17px; font-weight: bold; padding-bottom: 10px; border-bottom: 2px solid #b30000; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; text-transform: uppercase; text-align: center;}
+    
+    .tabs { display: flex; border-bottom: 2px solid #b30000; margin-bottom: 15px; gap: 2px; }
+    .tab-btn { flex: 1; padding: 10px 5px; cursor: pointer; background: #e9ecef; border: 1px solid #ccc; border-bottom: none; border-radius: 5px 5px 0 0; font-weight: bold; color: #555; font-family: Tahoma; font-size: 12px; text-align: center; }
     .tab-btn.active { background: #b30000; color: #fff; border-color: #b30000; }
     
-    .fieldset { border: 1px solid #d1d5db; padding: 15px; position: relative; background: #fafafa; border-radius: 4px; margin-bottom: 15px; }
+    .fieldset { border: 1px solid #d1d5db; padding: 15px 10px 10px 10px; position: relative; background: #fafafa; border-radius: 4px; margin-bottom: 15px; }
     .fieldset-legend { position: absolute; top: -9px; left: 10px; background: #fafafa; padding: 0 5px; color: #333; font-weight: bold; font-size: 12px; }
-    .date-group { display: flex; gap: 30px; align-items: center; }
-    .form-group { display: flex; align-items: center; gap: 15px; flex: 1; margin-bottom: 15px; }
-    .form-group label { width: 90px; text-align: right; color: #444; font-weight: bold; }
-    input, select { flex: 1; padding: 8px; border: 1px solid #ccc; border-radius: 3px; font-family: Tahoma; }
+    .date-group { display: flex; gap: 15px; align-items: center; justify-content: space-between; }
     
-    button.btn-primary { padding: 10px 20px; background: #b30000; border: none; border-radius: 3px; cursor: pointer; color: #fff; font-family: Tahoma; font-weight: bold; font-size: 13px;}
+    .form-group { display: flex; align-items: center; gap: 10px; flex: 1; margin-bottom: 12px; }
+    .form-group label { width: 85px; text-align: right; color: #444; font-weight: bold; font-size: 12px;}
+    input, select { flex: 1; padding: 8px; border: 1px solid #ccc; border-radius: 3px; font-family: Tahoma; width: 100%; box-sizing: border-box;}
+    
+    button.btn-primary { padding: 10px 15px; background: #b30000; border: none; border-radius: 3px; cursor: pointer; color: #fff; font-family: Tahoma; font-weight: bold; font-size: 13px; width: 100%;}
     button:disabled { background: #ccc !important; cursor: not-allowed; color: #666 !important; }
-    .status-bar { background: #d4edda; text-align: center; padding: 10px; font-weight: bold; color: #155724; margin-bottom: 10px; border: 1px solid #c3e6cb; border-radius: 3px;}
-    .log-box { width: 100%; height: 250px; background: #1e1e1e; color: #00ff00; border: 1px solid #000; margin-top: 10px; overflow-y: auto; font-family: Consolas, monospace; padding: 10px; box-sizing: border-box; font-size: 12px; border-radius: 3px;}
+    .status-bar { background: #d4edda; text-align: center; padding: 10px; font-weight: bold; color: #155724; margin-bottom: 10px; border: 1px solid #c3e6cb; border-radius: 3px; line-height: 1.5;}
+    
+    .log-box { width: 100%; height: 380px; background: #1e1e1e; color: #00ff00; border: 1px solid #000; margin-top: 10px; overflow-y: auto; font-family: Consolas, monospace; padding: 10px; box-sizing: border-box; font-size: 12px; border-radius: 3px;}
+    
     .hidden { display: none !important; }
     .version-panel { position: fixed; bottom: 10px; right: 10px; background: rgba(0, 0, 0, 0.8); color: #fff; padding: 8px; border-radius: 4px; font-size: 11px; pointer-events: none; z-index:9999; }
     .log-error { color: #ff4c4c; font-weight: bold; }
+    .download-link { color: #b30000; font-weight: 800; text-decoration: underline; cursor: pointer; margin-top: 5px; display: inline-block; font-size: 13px; background: #fff; padding: 4px 10px; border-radius: 3px; border: 1px dashed #b30000; }
+    .download-link:hover { background: #b30000; color: #fff; }
   </style>
 </head>
 <body>
 
-<div id="loginForm" class="container" style="max-width: 500px;">
-  <div class="header" style="justify-content: center; font-size: 16px;">Đăng nhập cổng TCT</div>
-  <div style="background: #fafafa; padding: 25px 20px 10px 20px; border: 1px solid #ddd; border-radius: 4px;">
+<div id="loginForm" class="container">
+  <div class="header" style="justify-content: center;">Đăng nhập cổng TCT</div>
+  <div style="background: #fafafa; padding: 25px 20px 10px 15px; border: 1px solid #ddd; border-radius: 4px;">
     
     <div class="form-group">
         <label>Mã số thuế:</label>
@@ -49,7 +55,7 @@
         <label>Captcha:</label>
         <div style="display: flex; flex: 1; gap: 10px;">
             <img id="captchaImg" src="" style="height:35px; border:1px solid #ccc; flex:1; background:#fff; border-radius:3px;">
-            <button type="button" onclick="loadCaptcha()" style="background:#6c757d; color:#fff; border:none; padding:0 15px; height: 37px; cursor:pointer; border-radius:3px;" title="Tải lại Captcha">🔄</button>
+            <button type="button" onclick="loadCaptcha()" style="background:#6c757d; color:#fff; border:none; padding:0 15px; cursor:pointer; border-radius:3px;" title="Tải lại Captcha">🔄</button>
         </div>
     </div>
 
@@ -62,15 +68,14 @@
   </div>
   
   <div style="text-align: center; margin-top: 20px;">
-    <button class="btn-primary" onclick="handleLoginClick()" id="btnLogin" disabled style="width: 100%; padding: 12px 0; font-size: 14px;">ĐANG CHUẨN BỊ...</button>
+    <button class="btn-primary" onclick="handleLoginClick()" id="btnLogin" disabled>ĐANG CHUẨN BỊ...</button>
   </div>
-  <div id="logBox" class="log-box" style="height: 100px; display: none;"></div>
 </div>
 
 <div id="mainForm" class="container hidden">
-  <div class="header">
-      Hệ Thống Đồng Bộ Dữ Liệu Hóa Đơn Điện Tử TCT
-      <button onclick="logout()" style="background:#6c757d; color:#fff; border:none; padding:6px 15px; cursor:pointer; border-radius:3px; font-size:12px; font-weight: normal; text-transform: none;">Đăng xuất</button>
+  <div class="header" style="font-size: 15px;">
+      Hệ Thống Đồng Bộ Dữ Liệu HĐĐT
+      <button onclick="logout()" style="background:#6c757d; color:#fff; border:none; padding:4px 10px; cursor:pointer; border-radius:3px; font-size:11px; font-weight: normal; text-transform: none;">Đăng xuất</button>
   </div>
   
   <div class="tabs">
@@ -83,26 +88,29 @@
   <div class="fieldset">
     <span class="fieldset-legend">Thời gian truy xuất</span>
     <div class="date-group">
-        <div class="form-group" style="margin-bottom: 0;"><label>Từ ngày:</label><input type="date" id="fromDate"></div>
-        <div class="form-group" style="margin-bottom: 0;"><label>Đến ngày:</label><input type="date" id="toDate"></div>
+        <div class="form-group" style="margin-bottom: 0;"><label style="width: 60px;">Từ ngày:</label><input type="date" id="fromDate"></div>
+        <div class="form-group" style="margin-bottom: 0;"><label style="width: 65px;">Đến ngày:</label><input type="date" id="toDate"></div>
     </div>
   </div>
 
-  <div style="display: flex; gap: 15px; margin-bottom: 5px;">
-    <button class="btn-primary" id="btnDownload" style="flex:3; height:45px;" onclick="startDownload()">BẮT ĐẦU ĐỒNG BỘ DỮ LIỆU</button>
-    <button id="btnExportExcel" class="btn-primary hidden" style="flex:1; background:#28a745;" onclick="downloadExcel()">📥 TẢI EXCEL KẾT QUẢ</button>
+  <div style="display: flex; gap: 10px; margin-bottom: 5px;">
+    <button class="btn-primary" id="btnDownload" onclick="startDownload()">BẮT ĐẦU ĐỒNG BỘ DỮ LIỆU</button>
+    <button id="btnExportExcel" class="btn-primary hidden" style="background:#28a745; border: 1px solid #1e7e34;" onclick="downloadExcel(true)">📥 TẢI LẠI EXCEL KẾT QUẢ</button>
   </div>
   
   <div id="statusBar" class="status-bar hidden">Đang kết nối cổng TCT và phân tích chuỗi XML...</div>
+  <div id="logBox" class="log-box"></div>
 </div>
 
-<div class="version-panel">v28.0 | <span id="timeLoaded"></span> | Enterprise UI Polished</div>
+<div class="version-panel">v41.0 | <span id="timeLoaded"></span> | OS MAX_PATH Bulletproof</div>
 
 <script>
   let isSystemReady = false, tokenStr = "";
   let dataBan_Summary = [], dataBan_XML = [];
   let dataMua_Summary = [], dataMua_XML = [];
+  let errorLogList = [];
   let runStartTime = "", runEndTime = "";
+  let myCompanyName = ""; 
 
   const BASE_URL = "/api"; 
   const HEADERS = { "Accept": "application/json, text/plain, */*", "Content-Type": "application/json; charset=UTF-8" };
@@ -207,11 +215,6 @@
           tokenStr = d.token; 
           document.getElementById('loginForm').classList.add('hidden'); 
           document.getElementById('mainForm').classList.remove('hidden'); 
-          
-          const logBox = document.getElementById('logBox');
-          logBox.style.display = "block";
-          document.getElementById('mainForm').appendChild(logBox); 
-          
           logMsg("Xác thực hệ thống TCT thành công!"); 
       }
       else { alert(d.message); loadCaptcha(); }
@@ -221,7 +224,7 @@
   const mapStatus = (c) => ({"1":"Hóa đơn mới","2":"Đã cấp mã","3":"Hủy","4":"Thay thế","5":"Điều chỉnh","6":"Bị thay thế"}[c] || c);
   const mapCheck = (c, t) => t==='mua_vao' ? ({"5":"Đã cấp mã","6":"TCT đã nhận"}[c]||c) : ({"0":"TCT đã nhận","5":"Đã cấp mã"}[c]||c);
 
-  function parseXMLToFlatRows(xmlString, invBaseInfo) {
+  function parseXMLToFlatRows(xmlString, invBaseInfo, type) {
       let cleanXml = xmlString
           .replace(/<DigestValue>[\s\S]*?<\/DigestValue>/gi, '<DigestValue>ZZZZZZZZZZZZZZ</DigestValue>')
           .replace(/<SignatureValue>[\s\S]*?<\/SignatureValue>/gi, '<SignatureValue>ZZZZZZZZZZZZZZ</SignatureValue>')
@@ -267,6 +270,15 @@
       }
 
       let baseInfo = flatten(doc.documentElement);
+      
+      if(!myCompanyName) {
+          if(type === 'ban_ra' && baseInfo.DLHDon_NDHDon_NBan_Ten) {
+              myCompanyName = baseInfo.DLHDon_NDHDon_NBan_Ten;
+          } else if(type === 'mua_vao' && baseInfo.DLHDon_NDHDon_NMua_Ten) {
+              myCompanyName = baseInfo.DLHDon_NDHDon_NMua_Ten;
+          }
+      }
+
       let finalBaseInfo = { ...invBaseInfo, ...baseInfo };
 
       let rows = [];
@@ -327,14 +339,38 @@
               
               const list = data.datas || [];
               for(let inv of list) {
-                  let info = type==='ban_ra'?`MST người mua: ${inv.nmmst}\nTên: ${inv.tennmua}`:`MST người bán: ${inv.nbmst}\nTên: ${inv.tennb}`;
+                  let mstDoiTac = type === 'ban_ra' ? inv.nmmst : inv.nbmst;
+                  let fallbackPartnerName = type === 'ban_ra' ? inv.tennmua : inv.tennb;
                   let padShdon = String(inv.shdon).padStart(7, '0');
+                  let invDate = inv.tdlap.split('T')[0];
+                  let loaiText = type === 'ban_ra' ? 'Bán Ra' : 'Mua Vào';
 
-                  let invBaseInfo = { "STT": results.summary.length+1, "Mã số thuế": type==='ban_ra'?inv.nmmst:inv.nbmst, "Ký hiệu mẫu số": inv.khmshdon, "Ký hiệu hóa đơn": inv.khhdon, "Số hóa đơn": padShdon, "Ngày lập": inv.tdlap.split('T')[0], "Thông tin đối tác": info, "Tổng tiền chưa thuế": parseFloat(inv.tgtcthue)||0, "Tổng tiền thuế": parseFloat(inv.tgtthue)||0, "Chiết khấu": parseFloat(inv.ttcktmai)||0, "Phí": parseFloat(inv.tgtkhac)||0, "Tổng thanh toán": parseFloat(inv.tgtttbso)||0, "Tiền tệ": inv.dvtte, "Trạng thái": mapStatus(inv.tthai), "Kết quả": mapCheck(inv.ttxly, type) };
+                  let mstKey = type === 'ban_ra' ? 'MST Khách Hàng' : 'MST Nhà Cung Cấp';
+                  let tenKey = type === 'ban_ra' ? 'Tên Khách Hàng' : 'Tên Nhà Cung Cấp';
+
+                  let displayPartner = (fallbackPartnerName && fallbackPartnerName !== "undefined") ? fallbackPartnerName : `MST: ${mstDoiTac}`;
+                  logMsg(`HĐ ${loaiText}: ${padShdon} | Ngày: ${invDate} | ${displayPartner}`);
+
+                  let invBaseInfo = { 
+                      "STT": results.summary.length+1, 
+                      "Ký hiệu mẫu số": inv.khmshdon, 
+                      "Ký hiệu hóa đơn": inv.khhdon, 
+                      "Số hóa đơn": padShdon, 
+                      "Ngày lập": invDate, 
+                      [mstKey]: mstDoiTac,
+                      [tenKey]: fallbackPartnerName,
+                      "Tổng tiền chưa thuế": parseFloat(inv.tgtcthue)||0, 
+                      "Tổng tiền thuế": parseFloat(inv.tgtthue)||0, 
+                      "Chiết khấu": parseFloat(inv.ttcktmai)||0, 
+                      "Phí": parseFloat(inv.tgtkhac)||0, 
+                      "Tổng thanh toán": parseFloat(inv.tgtttbso)||0, 
+                      "Tiền tệ": inv.dvtte, 
+                      "Trạng thái": mapStatus(inv.tthai), 
+                      "Kết quả": mapCheck(inv.ttxly, type) 
+                  };
                   
                   results.summary.push(invBaseInfo);
 
-                  logMsg(`Đang trích xuất ZIP & Đồng bộ HĐ: ${padShdon}`);
                   try {
                       const urlZip = `${BASE_URL}/query/invoices/export-xml?nbmst=${inv.nbmst}&khhdon=${encodeURIComponent(inv.khhdon)}&shdon=${inv.shdon}&khmshdon=${encodeURIComponent(inv.khmshdon)}`;
                       const xr = await fetch(urlZip, { headers: auth });
@@ -347,13 +383,37 @@
                       const xmlFilename = Object.keys(zip.files).find(name => name.toLowerCase().endsWith('.xml'));
                       if(xmlFilename) {
                           const xmlContent = await zip.files[xmlFilename].async("string");
-                          const flatRows = parseXMLToFlatRows(xmlContent, invBaseInfo);
+                          const flatRows = parseXMLToFlatRows(xmlContent, invBaseInfo, type);
                           results.xml = results.xml.concat(flatRows);
+                          
+                          let extractedName = "";
+                          if(flatRows.length > 0) {
+                              extractedName = type === 'ban_ra' ? flatRows[0]["Tên người mua"] : flatRows[0]["Tên người bán"];
+                          }
+                          
+                          if (extractedName && extractedName !== "undefined") {
+                              invBaseInfo[tenKey] = extractedName;
+                          } else if (!invBaseInfo[tenKey] || invBaseInfo[tenKey] === "undefined") {
+                              invBaseInfo[tenKey] = "Không xác định";
+                          }
                       } else {
-                          throw new Error("Không tìm file XML");
+                          throw new Error("Không tìm thấy file XML");
                       }
                   } catch(ex){ 
-                      logMsg(`[LỖI] HĐ ${padShdon}: ${ex.message || ex}`, true);
+                      let errorMsg = ex.message || ex;
+                      let cleanPartnerName = fallbackPartnerName && fallbackPartnerName !== "undefined" ? fallbackPartnerName : "Không xác định";
+                      invBaseInfo[tenKey] = cleanPartnerName;
+                      
+                      logMsg(`[LỖI] HĐ: ${padShdon} -> Chi tiết: ${errorMsg}`, true);
+                      
+                      errorLogList.push({
+                          "Loại HĐ": loaiText,
+                          "Số hóa đơn": padShdon,
+                          "Ngày lập": invDate,
+                          [mstKey]: mstDoiTac,
+                          [tenKey]: cleanPartnerName,
+                          "Chi tiết lỗi": errorMsg
+                      });
                   }
                   await delay(ms);
               }
@@ -365,18 +425,36 @@
 
   async function startDownload() {
     runStartTime = new Date().toLocaleString('vi-VN');
+    errorLogList = [];
+    myCompanyName = ""; 
+    
     const f = document.getElementById('fromDate').value, t = document.getElementById('toDate').value, mode = document.getElementById('currentHdType').value;
     if(!f || !t) return alert("Chọn ngày");
     
-    document.getElementById('statusBar').classList.remove('hidden'); document.getElementById('btnDownload').disabled = true;
+    const statusBar = document.getElementById('statusBar');
+    statusBar.classList.remove('hidden'); 
+    statusBar.innerHTML = "Đang kết nối cổng TCT và đồng bộ dữ liệu...";
+    statusBar.style.backgroundColor = "#d4edda";
+    statusBar.style.color = "#155724";
+    
+    document.getElementById('btnDownload').disabled = true;
+    document.getElementById('btnDownload').innerText = "ĐANG CHẠY...";
+    document.getElementById('btnExportExcel').classList.add('hidden');
+    
     dataBan_Summary = []; dataBan_XML = []; dataMua_Summary = []; dataMua_XML = [];
     
-    if(mode==='ban_ra'||mode==='all'){ logMsg("Bắt đầu lấy & đồng bộ dữ liệu BÁN RA..."); const r = await fetchDirection('ban_ra',f,t); dataBan_Summary = r.summary; dataBan_XML = r.xml; }
-    if(mode==='mua_vao'||mode==='all'){ logMsg("Bắt đầu lấy & đồng bộ dữ liệu MUA VÀO..."); const r = await fetchDirection('mua_vao',f,t); dataMua_Summary = r.summary; dataMua_XML = r.xml; }
+    if(mode==='ban_ra'||mode==='all'){ logMsg("--- BẮT ĐẦU ĐỒNG BỘ BÁN RA ---"); const r = await fetchDirection('ban_ra',f,t); dataBan_Summary = r.summary; dataBan_XML = r.xml; }
+    if(mode==='mua_vao'||mode==='all'){ logMsg("--- BẮT ĐẦU ĐỒNG BỘ MUA VÀO ---"); const r = await fetchDirection('mua_vao',f,t); dataMua_Summary = r.summary; dataMua_XML = r.xml; }
     
-    document.getElementById('statusBar').classList.add('hidden'); document.getElementById('btnDownload').disabled = false; document.getElementById('btnExportExcel').classList.remove('hidden');
     runEndTime = new Date().toLocaleString('vi-VN');
-    logMsg("HOÀN TẤT QUÁ TRÌNH TRÍCH XUẤT!");
+    logMsg("HOÀN TẤT QUÁ TRÌNH ĐỒNG BỘ DỮ LIỆU!");
+    
+    statusBar.innerHTML = "Đang đóng gói file Excel, vui lòng đợi giây lát...";
+    statusBar.style.backgroundColor = "#fff3cd";
+    
+    setTimeout(() => {
+        downloadExcel(false);
+    }, 500);
   }
 
   function applyHeaderStyle(ws) {
@@ -423,7 +501,7 @@
         XLSX.utils.book_append_sheet(wb, ws, sheetName);
   }
 
-  function downloadExcel() {
+  function downloadExcel(isManual = false) {
     try {
         const wb = XLSX.utils.book_new();
         
@@ -438,22 +516,32 @@
             { "Tham số": "Thời gian bắt đầu chạy", "Giá trị": runStartTime },
             { "Tham số": "Thời gian hoàn tất", "Giá trị": runEndTime },
             { "Tham số": "Khoảng thời gian lấy dữ liệu", "Giá trị": `Từ ${f} đến ${t}` },
-            { "Tham số": "Loại dữ liệu", "Giá trị": modeText }
+            { "Tham số": "Loại dữ liệu", "Giá trị": modeText },
+            { "Tham số": "Số hóa đơn bị lỗi (TCT không phản hồi XML)", "Giá trị": errorLogList.length }
         ];
         const wsInfo = XLSX.utils.json_to_sheet(infoData);
-        wsInfo['!cols'] = [{ wpx: 200 }, { wpx: 300 }];
+        wsInfo['!cols'] = [{ wpx: 250 }, { wpx: 300 }];
         applyHeaderStyle(wsInfo);
         XLSX.utils.book_append_sheet(wb, wsInfo, "ThongTinDuLieu");
 
+        if(errorLogList.length > 0) {
+            const wsError = XLSX.utils.json_to_sheet(errorLogList);
+            wsError['!cols'] = [{wpx: 80}, {wpx: 100}, {wpx: 100}, {wpx: 120}, {wpx: 300}, {wpx: 200}];
+            applyHeaderStyle(wsError);
+            XLSX.utils.book_append_sheet(wb, wsError, "DanhSachLoi");
+        }
+
+        const summaryCols = [ {wpx: 40}, {wpx: 100}, {wpx: 100}, {wpx: 80}, {wpx: 100}, {wpx: 120}, {wpx: 300}, {wpx: 120}, {wpx: 120}, {wpx: 100}, {wpx: 100}, {wpx: 120}, {wpx: 60}, {wpx: 120}, {wpx: 150} ];
+
         if(dataBan_Summary.length) {
             const wsBan = XLSX.utils.json_to_sheet(dataBan_Summary);
-            wsBan['!cols'] = [ {wpx: 40}, {wpx: 100}, {wpx: 100}, {wpx: 100}, {wpx: 80}, {wpx: 80}, {wpx: 300}, {wpx: 120}, {wpx: 120}, {wpx: 150}, {wpx: 100}, {wpx: 120}, {wpx: 80}, {wpx: 150}, {wpx: 200} ];
+            wsBan['!cols'] = summaryCols;
             applyHeaderStyle(wsBan); 
             XLSX.utils.book_append_sheet(wb, wsBan, "HoaDonBanRa");
         }
         if(dataMua_Summary.length) {
             const wsMua = XLSX.utils.json_to_sheet(dataMua_Summary);
-            wsMua['!cols'] = [ {wpx: 40}, {wpx: 100}, {wpx: 100}, {wpx: 100}, {wpx: 80}, {wpx: 80}, {wpx: 300}, {wpx: 120}, {wpx: 120}, {wpx: 150}, {wpx: 100}, {wpx: 120}, {wpx: 80}, {wpx: 150}, {wpx: 200} ];
+            wsMua['!cols'] = summaryCols;
             applyHeaderStyle(wsMua); 
             XLSX.utils.book_append_sheet(wb, wsMua, "HoaDonMuaVao");
         }
@@ -461,8 +549,47 @@
         exportToExcelWithMappedColumns(dataBan_XML, "XML_ChiTiet_BanRa", wb);
         exportToExcelWithMappedColumns(dataMua_XML, "XML_ChiTiet_MuaVao", wb);
         
-        XLSX.writeFile(wb, `BaoCao_TCT_v28_${new Date().getTime()}.xlsx`);
-        logMsg("Đã tải tệp Excel thành công!");
+        const runDateStr = new Date().toLocaleDateString('vi-VN', {day:'2-digit', month:'2-digit', year:'2-digit'}).replace(/\//g, '');
+        
+        const fParts = f.split('-'); 
+        const fStr = fParts.length === 3 ? fParts[2] + fParts[1] + fParts[0].substring(2,4) : "";
+        
+        const tParts = t.split('-');
+        const tStr = tParts.length === 3 ? tParts[2] + tParts[1] + tParts[0].substring(2,4) : "";
+
+        const mst = document.getElementById('username').value;
+        
+        // V41: Giới hạn an toàn chống văng Windows MAX_PATH (120 ký tự cho tên cty)
+        let cleanCty = myCompanyName ? myCompanyName.replace(/[<>:"/\\|?*]/g, '').trim().replace(/\s+/g, '_') : "CongTy";
+        if(cleanCty.length > 120) {
+            cleanCty = cleanCty.substring(0, 120);
+        }
+        
+        const fileName = `${runDateStr}_${fStr}-${tStr}_${mst}_${cleanCty}.xlsx`;
+
+        const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+        const blob = new Blob([wbout], { type: 'application/octet-stream' });
+        const url = window.URL.createObjectURL(blob);
+
+        if(!isManual) {
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+
+        const statusBar = document.getElementById('statusBar');
+        statusBar.innerHTML = `✅ ĐÃ XONG! <br><a class="download-link" href="${url}" download="${fileName}">Bấm vào đây để lưu File Excel</a>`;
+        statusBar.style.backgroundColor = "#d1ecf1";
+        statusBar.style.color = "#856404";
+        
+        document.getElementById('btnDownload').disabled = false; 
+        document.getElementById('btnDownload').innerText = "BẮT ĐẦU ĐỒNG BỘ DỮ LIỆU";
+        document.getElementById('btnExportExcel').classList.remove('hidden');
+
+        if(!isManual) logMsg(`Đã tự động tạo file thành công: ${fileName}`);
     } catch (e) {
         alert("Lỗi khi tạo file Excel. Bật F12 để xem chi tiết.");
         console.error(e);
